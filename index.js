@@ -25,9 +25,11 @@ mongoose
 //   return await Course.find({ isPublished: true, price: { $gte: 15 } }).sort("price");
 // }
 
-// (2) Birinci adımdakine alternatif olarak başlığında "by" geçen tüm kursları listele
+// (2) Tüm yayınlanmış 15$ ve üstü bedelli ya da başlığında "by" geçen tüm kursları listele
 async function getCourses() {
-  return await Course.find({ isPublished: true, name: /.*by.*/ }).sort("name");
+  return await Course.find({ isPublished: true })
+    .or([{ price: { $gte: 15 } }, { name: /.*by.*/ }]) //or ve and için array şeklinde yazılması lazım UNUTMA!!!
+    .sort("name");
 }
 
 async function start() {
