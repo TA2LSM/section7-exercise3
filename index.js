@@ -22,12 +22,12 @@ mongoose
 
 // (1) Tüm yayınlanmış 15$ ve üstü bedelli kurslarını listele
 // async function getCourses() {
-//   return await Course.find({ price: { $gte: 15 } }).sort("price");
+//   return await Course.find({ isPublished: true, price: { $gte: 15 } }).sort("price");
 // }
 
 // (2) Birinci adımdakine alternatif olarak başlığında "by" geçen tüm kursları listele
 async function getCourses() {
-  return await Course.find({ name: /.*by.*/ }).sort("name");
+  return await Course.find({ isPublished: true, name: /.*by.*/ }).sort("name");
 }
 
 async function start() {
